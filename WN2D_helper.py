@@ -170,6 +170,7 @@ emis_tab = ['H  1 4861.32A',
             'S  3 9068.62A',
             'S  3 18.7078M',
             'S  3 33.4704M',
+            'Ar 3 7135.79A',
             'Ar 4 7170.70A',
             'Ar 4 7263.33A',
             'Ar 4 4711.26A',
@@ -250,7 +251,11 @@ l_dict = {'Has': r'H$\alpha$',
         'O3as': r'[OIII] 4363',
         'R23s': r'[OII] + [OIII]',
         'rO3s': r'[OIII] 4363/5007',
+        'Ar3O3': r'[ArIII]/[OIII]',
+        'S3O3': r'[SIII]/[OIII]',
         'S2s': r'[SII]',
+        'S3s': r'[SIII]',
+        'Ar3s': r'[ArIII]',
         'O1s': r'[OI]',
         'Cl3s': r'[ClIII]',
         'logUs': r'log(U)',
@@ -299,6 +304,8 @@ class model_grid(object):
         self.I1['R23s'] = np.asarray([1.3*M.get_emis_vol('O__3_500684A') + M.get_emis_vol('O__2_372603A') + M.get_emis_vol('O__2_372881A') for M in self.Ms])
         self.I1['rO3s'] = np.asarray([(M.get_emis_vol('O__3_436321A') + M.get_emis_vol('O_3R_436300A')) / M.get_emis_vol('O__3_500684A') for M in self.Ms])
         self.I1['S2s'] = np.asarray([M.get_emis_vol('S__2_671644A') + M.get_emis_vol('S__2_673082A') for M in self.Ms])
+        self.I1['S3s'] = np.asarray([M.get_emis_vol('S__3_906862A') for M in self.Ms])
+        self.I1['Ar3s'] = np.asarray([M.get_emis_vol('AR_3_713579A') for M in self.Ms])
         self.I1['pR2s'] = self.I1['O2s'] / self.I1['Hbs']
         self.I1['pN2s'] = 1.33 * self.I1['N2s'] / self.I1['Hbs']
         self.I1['pS2s'] = self.I1['S2s'] / self.I1['Hbs']
@@ -417,6 +424,8 @@ class model_grid(object):
         self.Maps['O3as'] = np.asarray([M2D.get_emis('O__3_436321A') + M2D.get_emis('O_3R_436300A') for M2D in self.M2Ds])
         self.Maps['R23s'] = np.asarray([1.3*M2D.get_emis('O__3_500684A') + M2D.get_emis('O__2_372603A') + M2D.get_emis('O__2_372881A') for M2D in self.M2Ds])
         self.Maps['S2s'] = np.asarray([(M2D.get_emis('S__2_671644A') + M2D.get_emis('S__2_673082A')) for M2D in self.M2Ds])
+        self.Maps['S3s'] = np.asarray([M2D.get_emis('S__3_906862A') for M2D in self.M2Ds])
+        self.Maps['Ar3s'] = np.asarray([M2D.get_emis('AR_3_713579A') for M2D in self.M2Ds])
         self.Maps['pR2s'] = self.Maps['O2s'] 
         self.Maps['pN2s'] = 1.33 * self.Maps['N2s'] 
         self.Maps['pS2s'] = self.Maps['S2s'] 
